@@ -1,5 +1,4 @@
 import { defineComponent, PropType, nextTick, onMounted, ref, onUnmounted } from 'vue';
-import { CLoading } from '@/components/CLoading';
 import './index.css';
 
 export default defineComponent({
@@ -88,13 +87,6 @@ export default defineComponent({
             {slots.footer?.()}
           </footer>
         ) : null}
-        {props.isLoading ? (
-          <CLoading type="spinner" vertical={true}>
-            加载中...
-          </CLoading>
-        ) : (
-          ''
-        )}
       </div>
     );
   },

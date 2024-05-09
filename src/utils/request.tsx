@@ -1,5 +1,5 @@
 import axios, { type AxiosRequestConfig, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
-import { showToast } from 'vant';
+import { message } from 'ant-design-vue';
 import { ACCESS_TOKEN_KEY } from '@/enums';
 
 export interface RequestOptions {
@@ -35,7 +35,7 @@ export const request = async <
     const { isShowToast } = options;
     const res: AxiosResponse = await service.request(config);
     if (res.data?.code != 0 && isShowToast) {
-      showToast(res.data?.msg);
+      message.info(res.data?.msg);
     }
     return Promise.resolve(res.data);
   } catch (error) {

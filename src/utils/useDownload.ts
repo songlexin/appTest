@@ -1,4 +1,4 @@
-import { showFailToast } from 'vant';
+import { message } from 'ant-design-vue';
 import { useUserStore } from '@/store/modules/user';
 
 const userStore = useUserStore();
@@ -18,7 +18,7 @@ export const useDownload = (href: string, fileName: string) => {
   xhr.onerror = function (err) {
     console.log('XHR error');
     console.log(err);
-    showFailToast(`导出失败！`);
+    message.error(`导出失败！`);
   };
   xhr.onload = function () {
     if (this.status === 200) {
@@ -29,7 +29,7 @@ export const useDownload = (href: string, fileName: string) => {
         readerBlob.readAsText(blob, 'utf-8');
         readerBlob.onload = function () {
           const res = JSON.parse(readerBlob.result);
-          showFailToast(res.msg);
+          message.error(res.msg);
         };
         return;
       } else {

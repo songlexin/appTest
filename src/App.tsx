@@ -1,15 +1,13 @@
-import { ConfigProvider } from 'vant';
+import { ConfigProvider } from 'ant-design-vue';
 import { defineComponent, KeepAlive, Suspense } from 'vue';
 import { RouterView } from 'vue-router';
-import 'vant/lib/index.css';
-import './App.css';
 
 export default defineComponent({
   name: 'App',
   setup() {
     return () => (
-      <ConfigProvider theme-vars={{ blue: '#6476FF', navBarArrowSize: '1.4rem' }}>
-        <Suspense onFallback={() => <div> Loading...</div>}>
+      <ConfigProvider>
+        <Suspense>
           <RouterView>
             {
               //@ts-expect-error 确定RouterView包含Component，route参数

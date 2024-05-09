@@ -1,5 +1,5 @@
 // 导入button组件
-import './../styles/index.less';
+import '@/styles/index.less';
 // import xcPrioritySpan from './xc/xc-span/xc-priority-span/index.vue';
 // import dynamicTable from './core/dynamic-table';
 import uploadImgBase from './base/upload-img-base/index.vue';

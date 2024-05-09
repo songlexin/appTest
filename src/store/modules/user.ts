@@ -2,7 +2,6 @@ import { defineStore } from 'pinia';
 import { useRoute, useRouter } from 'vue-router';
 // import { bimLogin } from '@/api/common';
 import { ACCESS_TOKEN_KEY } from '@/enums';
-import { showDialog } from 'vant';
 import { usePageStore } from '@/store/modules/page';
 
 interface UserState {
