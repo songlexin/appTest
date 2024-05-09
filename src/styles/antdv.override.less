@@ -1,0 +1,744 @@
+@import './variables.less';
+
+// .ant-col {
+//   width: 100%;
+// }
+// html {
+//   filter: grayscale(1);
+// }
+.grayscale {
+  filter: grayscale(100%);
+}
+body {
+  min-width: 1280px;
+  overflow-y: hidden;
+  overflow-x: auto !important;
+  .ant-message {
+    z-index: 999999;
+  }
+
+  span.anticon:not(.app-iconify) {
+    vertical-align: 0.125em !important;
+  }
+}
+
+#app {
+  height: 100%;
+}
+
+.ant-image-preview-root img {
+  display: unset;
+}
+
+.ant-table-thead > tr > th {
+  background: #f2f3f5;
+  font-weight: bold;
+  color: #323232;
+}
+.xc-page {
+  background-color: #fff;
+  padding: 8px 0px 0px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  .tab {
+    margin: 0 16px;
+    height: 42px !important;
+    line-height: 42px !important;
+    border-bottom: 1px solid #dcdee0 !important;
+    display: flex;
+    cursor: pointer;
+    padding: 0 !important;
+    .tab-li {
+      margin: 0 !important;
+      margin-right: 24px !important;
+      margin-bottom: -1px !important;
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      color: #646566 !important;
+    }
+    .active {
+      color: var(--ant-primary-color) !important;
+      border-bottom: 2px solid var(--ant-primary-color) !important;
+      font-weight: 600 !important;
+    }
+  }
+  .xc-header {
+    // margin-bottom: 16px;
+    padding-left: 16px;
+  }
+  .xc-content {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0%;
+    overflow-y: hidden;
+    .ant-spin-nested-loading {
+      height: 100%;
+      // overflow: auto;
+    }
+    .ant-spin-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      // overflow: auto;
+    }
+    .ant-table {
+      height: 100%;
+      flex: 1;
+      overflow-y: hidden;
+      // .ant-table-header {
+      //   height: 48px;
+      // }
+      .ant-table-thead > tr > th {
+        background: #f2f3f5;
+        font-weight: bold;
+        color: #323232;
+      }
+      :deep(.ant-table-pagination.ant-pagination) {
+        margin: 0;
+        padding: 0px 24px;
+        border-top: 1px solid #e6e6e6;
+        height: 60px;
+        display: flex;
+        align-items: center;
+      }
+    }
+    .ant-table-pagination.ant-pagination {
+      margin: 0;
+      padding: 0px 24px;
+      border-top: 1px solid #e6e6e6;
+      height: 48px;
+      display: flex;
+      align-items: center;
+    }
+    .ant-table-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .ant-table-body {
+      flex: 1;
+    }
+    .ant-tabs-tab {
+      font-size: 16px;
+    }
+  }
+  .xc-foot {
+    margin-top: 8px;
+    background: #ffffff;
+    padding: 16px;
+  }
+}
+.ant-list-split {
+  .ant-spin-container {
+    overflow-y: auto;
+  }
+}
+.xc-content-table {
+  .ant-table-thead > tr > th {
+    background: #f2f3f5;
+    font-weight: bold;
+    color: #323232;
+  }
+}
+
+.table-top-action-btn {
+  justify-content: space-between;
+  row-gap: 0px;
+  flex-grow: 1;
+  margin-right: 10px;
+  align-items: center;
+  .ant-form-item-label {
+    margin-bottom: 0;
+  }
+  .ant-form-inline .ant-form-item-with-help {
+    margin-bottom: 0;
+  }
+}
+
+.advance-filter {
+  cursor: pointer;
+  margin-left: 8px;
+  display: inline-block;
+}
+
+// 弹出模态框
+.ant-modal-body {
+  padding: 24px;
+  overflow: hidden;
+  // padding-right: 40px;
+}
+
+// 产品弹框
+// .modal-select-box {
+//   .ant-modal-body {
+//     height: calc(100vh - 360px);
+//     padding: 16px 16px 0;
+//   }
+//   .ant-table-pagination {
+//     justify-content: center;
+//   }
+//   .ant-table {
+//     border-bottom: 1px solid #f0f0f0;
+//   }
+// }
+// 产品弹框
+.modal-select-box {
+  .ant-modal {
+    height: 80% !important;
+  }
+  .ant-modal-body {
+    height: calc(100vh - 360px);
+    padding: 16px 16px 0;
+  }
+  .ant-table-pagination {
+    // justify-content: center;
+  }
+  .ant-table {
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .modal-detail-header {
+    font-size: 16px;
+    line-height: 16px;
+    padding: 8px 0px 16px;
+    &.pt-0 {
+      padding-top: 0px;
+    }
+    .header-txt {
+      display: inline-block;
+      border-left: 4px solid var(--ant-primary-color);
+      padding-left: 8px;
+    }
+  }
+}
+.modal-new-box {
+  color: #333333;
+  padding-top: 0px;
+  // height: calc(100vh - 360px);
+  .ant-btn + .ant-btn {
+    margin-left: 16px;
+  }
+  .ant-row {
+    // justify-content: space-around;
+  }
+  .ant-modal {
+    width: 800px !important;
+    min-width: 800px;
+    .ant-form-item-control-input {
+      min-width: 200px;
+    }
+  }
+  .ant-modal-body {
+    padding: 24px;
+
+    .ant-table-pagination.ant-pagination {
+      margin-bottom: 0;
+    }
+  }
+  .ant-modal-footer {
+    padding: 14px 16px;
+    .ant-btn + .ant-btn:not(.ant-dropdown-trigger) {
+      margin-left: 16px;
+    }
+  }
+  .ant-table-tbody > tr.ant-table-row:hover > td,
+  .ant-table-tbody > tr > td.ant-table-cell-row-hover  {
+    background: var(--xc-cm1-color) !important;
+  }
+  //  弹框内详情
+  .modal-detail-body {
+    // 头部展示
+    .modal-detail-header {
+      font-size: 16px;
+      line-height: 16px;
+      padding: 8px 0px 16px;
+      &.pt-0 {
+        padding-top: 0px;
+      }
+      .header-txt {
+        display: inline-block;
+        border-left: 4px solid var(--ant-primary-color);
+        padding-left: 8px;
+      }
+    }
+    .label,
+    .value {
+      display: inline-block;
+      font-size: 14px;
+    }
+    .value {
+      color: #666;
+      margin-left: 8px;
+    }
+    :deep(.ant-col) {
+      display: flex;
+      .label {
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+.ant-modal-title,
+.ant-modal-confirm-body .ant-modal-confirm-title {
+  font-weight: 600;
+  color: #323232;
+}
+// .ant-table-pagination.ant-pagination {
+//     margin: 16px 0;
+//     position: fixed;
+//     bottom: 14px;
+//     right: 30px;
+// }
+
+.ant-btn {
+  // padding: 4px 13px;
+  border-radius: 2px;
+}
+.ant-btn-sm {
+  border-radius: 2px;
+  font-size: 14px;
+  height: 24px;
+  padding: 0 7px;
+}
+
+.ant-modal-body {
+  .ant-checkbox-wrapper {
+    width: 100px;
+  }
+  .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+    margin-left: 0px;
+  }
+}
+.ant-tabs-tab + .ant-tabs-tab {
+  margin: 0 0 0 24px;
+}
+.tbStatus-circle {
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+// 公共颜色
+@selectors: {
+  status-0: #10a397;
+  status-1: #46539d;
+  status-2: #3397cd;
+  status-3: #52c41a;
+  status-4: #ff4d4f;
+  status-5: #faad14;
+};
+each(@selectors, {
+    // .@{key}-@{index} {
+    //     background-color: @value;
+    // }
+    .@{key} {
+        background-color:@value;
+    }
+})
+
+//产品维护 供应信息 状态
+@selectors1: {
+  statuscode-0: #ccc;
+  statuscode-1: #52c41a;
+}
+each(@selectors1, {
+  // .@{key}-@{index} {
+  //     background-color: @value;
+  // }
+  .@{key} {
+      background-color:@value;
+  }
+})
+
+
+// form去掉所有表单冒号
+.ant-form-item-label > label::after {
+  content: '';
+}
+
+// 菜单样式修改
+.ant-menu-item {
+  // overflow: auto !important;
+  position: relative !important;
+}
+
+// 树样式
+.ant-tree .ant-tree-node-content-wrapper {
+  line-height: 28px;
+}
+.errClass {
+  .ant-modal-confirm .ant-modal-body {
+    padding: 24px 32px 16px !important;
+  }
+  .ant-modal {
+    width: 520px !important;
+  }
+}
+
+.errClass .errClassP {
+  max-height: 250px;
+  overflow-y: scroll;
+  display: block;
+}
+.xc-header-div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.xc-header-icon {
+  color: #999;
+  margin-left: 8px;
+  display: inline-block;
+  width: 12px;
+  height: 8px;
+  display: flex;
+  align-items: center;
+}
+
+//斑马纹
+.ant-table {
+  .ant-table-tbody tr:nth-child(2n-1) {
+    background-color: #f7f8fa;
+    // fix背景设置
+    .ant-table-cell-fix-left,
+    .ant-table-cell-fix-right {
+      background-color: #f7f8fa;
+    }
+  }
+  .ant-table-tbody > tr.ant-table-row-selected > td {
+    // background: var(--ant-primary-1) !important;
+  }
+}
+
+.ant-btn > .anticon + span,
+.ant-btn > span + .anticon {
+  margin-left: 6px;
+}
+
+.ant-btn {
+  min-width: 60px;
+  height: 32px;
+  line-height: 22px;
+  padding-bottom: 5px;
+  padding: 5px 16px;
+  &.ant-btn-link {
+    min-width: auto;
+  }
+  &:has(.anticon) {
+    padding-left: 12px;
+  }
+  &.ant-btn-lg {
+    min-width: 96px;
+    line-height: 24px;
+    height: 40px;
+    padding-bottom: 8px;
+    padding: 8px 24px;
+    &:has(.anticon) {
+      padding-left: 20px;
+    }
+  }
+  &.ant-btn-sm {
+    height: 22px;
+    line-height: 20px;
+    min-width: 40px;
+    padding: 0 8px;
+  }
+  &.ant-btn-icon-only:has(.anticon) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  &.ant-btn-icon-only {
+    vertical-align: top;
+    width: 32px;
+    min-width: initial;
+  }
+  &.ant-btn-sm.ant-btn-icon-only {
+    width: 22px;
+  }
+  &.ant-btn-lg.ant-btn-icon-only {
+    width: 40px;
+  }
+}
+.modal-box .ant-table-tbody > tr.ant-table-row:hover > td,
+.modal-box .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: var(--xc-cm1-color) !important;
+}
+.ant-btn.ant-btn-level2 {
+  border: 1px solid #0f998d;
+  color: #0f998d;
+  &:hover {
+    color: #0f998d;
+    background: #edfaf9;
+    border: 1px solid #30b6aa;
+  }
+  &:active {
+    color: #28524f;
+    background: none;
+    border: 1px solid #28524f;
+  }
+  &[disabled],
+  &[disabled]:active,
+  &[disabled]:hover {
+    color: #c8c9cc;
+    border: 1px solid #c8c9cc;
+    background: #fff;
+  }
+  &[disabled]:focus {
+    border: 1px solid #0f998d;
+  }
+}
+.ant-btn-primary {
+  box-shadow: none;
+  text-shadow: none;
+}
+.ant-btn-primary[disabled],
+.ant-btn-primary[disabled]:active,
+.ant-btn-primary[disabled]:focus,
+.ant-btn-primary[disabled]:hover {
+  background-color: #c8c9cc;
+  border: 1px solid #c8c9cc;
+  color: white;
+}
+.ant-btn-link {
+  &:hover {
+    color: #30b6aa;
+  }
+  &:active {
+    color: #28524f;
+  }
+  &[disabled],
+  &[disabled]:active,
+  &[disabled]:focus,
+  &[disabled]:hover {
+  }
+}
+.ant-btn:focus,
+.ant-btn:hover {
+}
+
+html {
+  --primary-color-active: #d0eae8;
+  --ant-error-color: #d40000;
+  --ant-error-color-hover: #e14c4c;
+  --ant-error-color-active: #b40000;
+  --ant-error-color-outline: #c93e3e;
+  --ant-warning-color: #ed6a0c;
+}
+.ant-modal-confirm .ant-modal-body {
+  padding: 24px;
+}
+// .ant-modal-confirm .ant-modal-body .ant-form-item:last-child {
+//   padding-bottom: 0;
+// }
+.ant-modal-confirm-content {
+  margin-top: 16px;
+}
+//  修改弹框 提示框的图标i颜色
+.ant-modal-confirm-info .ant-modal-confirm-body > .anticon {
+  color: var(--ant-primary-color);
+}
+
+// 表格样式
+.ant-table tfoot > tr > td,
+.ant-table tfoot > tr > th,
+.ant-table-tbody > tr > td,
+.ant-table-thead > tr > th {
+  line-height: 20px;
+}
+.ant-table-tbody > tr > td {
+  color: #323232;
+}
+.ant-table.ant-table-middle .ant-table-footer,
+.ant-table.ant-table-middle .ant-table-tbody > tr > td,
+.ant-table.ant-table-middle .ant-table-thead > tr > th,
+.ant-table.ant-table-middle .ant-table-title,
+.ant-table.ant-table-middle tfoot > tr > td,
+.ant-table.ant-table-middle tfoot > tr > th {
+  padding: 13px 8px;
+}
+
+.ant-table.ant-table-small .ant-table-footer,
+.ant-table.ant-table-small .ant-table-tbody > tr > td,
+.ant-table.ant-table-small .ant-table-thead > tr > th,
+.ant-table.ant-table-small .ant-table-title,
+.ant-table.ant-table-small tfoot > tr > td,
+.ant-table.ant-table-small tfoot > tr > th {
+  padding: 9x 8px;
+}
+
+.ant-table-tbody > tr > td:has(.nodata) {
+  border-bottom: 0;
+}
+
+// 配送走查修改
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):focus-within,
+.ant-radio-button-wrapper:focus-within {
+  box-shadow: none !important;
+}
+html {
+  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover,
+  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover,
+  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active,
+  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active,
+  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open,
+  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open,
+  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
+  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected {
+    color: white;
+  }
+}
+// 详情组件样式覆盖 marging padding重叠问题
+.xc-table-detail-description {
+  //
+  &.xc-header {
+    padding: 0 !important;
+  }
+  .ant-descriptions-header {
+    margin: 0 !important;
+  }
+}
+.xc-table-detail-description.ant-descriptions {
+  margin-bottom: 0;
+}
+.ant-table .ant-table-tbody > tr.ant-table-row-selected > td {
+  // background: var(--xc-cm2-color) !important;
+  background: #fff !important;
+}
+.ant-table .ant-table-tbody > tr.ant-table-row-click > td {
+  background: var(--xc-cm2-color) !important;
+}
+.ant-table .ant-table-tbody > tr:nth-child(2n-1).ant-table-row-selected > td {
+  // background: var(--xc-cm2-color) !important;
+  background: #f7f8fa !important;
+}
+
+// 表格内错误提示文字先去掉
+.ant-table .ant-form-item .ant-form-item-explain .ant-form-item-explain-error {
+  display: none !important;
+}
+// 表格tableTopRightAction插槽样式
+.dy-table .tool-bar .ant-space-item .table-top-right-action {
+  display: flex;
+  margin-right: 8px;
+  gap: 8px;
+}
+.ant-drawer-body {
+  padding: 16px;
+}
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background: #fff !important;
+}
+.ant-select-item:hover {
+  background: #f7f8fa !important;
+}
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background: #edfaf9 !important;
+  font-weight: 600 !important;
+  color: #323232 !important;
+}
+
+// 新增产品弹窗---分页器
+.custom-modal .modal-inherit-height {
+  .ant-modal-body {
+    margin: 0 !important;
+    padding: 16px 0 0 !important;
+    & > div {
+      height: 100% !important;
+      max-height: unset !important;
+    }
+    .checkbox-wrapper {
+      width: initial;
+    }
+    .xc-page {
+      padding-top: 0;
+    }
+  }
+}
+
+// 下拉选单图标
+.ant-select-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  .icon-icon_arrow_down {
+    padding-top: 1px;
+  }
+}
+._arrow-down-container {
+  .ant-transfer-list-header-dropdown {
+    margin-bottom: 2px;
+    svg {
+      display: none !important;
+    }
+  }
+}
+._arrow-down {
+  .anticon-down {
+    display: none !important;
+  }
+}
+.ant-select-show-arrow.ant-select-open.ant-select-show-search {
+  ._arrow-down {
+    .icon-icon_arrow_down,
+    .icon-icon_arrow_down_full {
+      display: none !important;
+    }
+  }
+}
+
+// 移除圆角
+.tabs-view .tabs-view-content {
+  border-radius: unset !important;
+  .xc-layout-lr-left {
+    border-radius: unset;
+  }
+  .xc-layout-lr-right {
+    border-radius: unset;
+  }
+}
+
+// fix列静态时添加阴影
+// .ant-table-cell-fix-right-first::after,
+// .ant-table-cell-fix-right-last::after {
+//   box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, 0.15);
+// }
+
+.ant-descriptions-item-label {
+  font-size: 14px;
+  font-family: HarmonyOS Sans SC-Regular, HarmonyOS Sans SC;
+  font-weight: 400;
+  color: #646566 !important; // 取n7色号
+  line-height: 22px;
+}
+
+.ant-descriptions-item-content {
+  font-size: 14px;
+  font-family: HarmonyOS Sans SC-Regular, HarmonyOS Sans SC;
+  font-weight: 400;
+  color: #323232 !important; //取n8色号
+}
+
+.ant-btn.ant-btn-background-ghost {
+  color: var(--ant-primary-color) !important;
+  border-color: var(--ant-primary-color) !important;
+}
+
+.split-span {
+  height: 12px;
+  background: #999999;
+  width: 1px;
+  display: inline-block;
+  margin: 0 8px;
+}
+
+// 确认弹框-删除按钮
+.ok-error-btn {
+  background-color: var(--ant-error-color) !important;
+}

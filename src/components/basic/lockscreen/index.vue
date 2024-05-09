@@ -1,0 +1,79 @@
+<template>
+  <transition name="slide-up">
+    <LockScreen
+      v-if="isLock && isMouted && ![LOGIN_NAME, REGISt,HosPITAL].includes($route.name as string)"
+      @begin-timer="timekeeping()"
+    />
+  </transition>
+</template>
+
+<script setup lang="ts">
+  import { computed, ref, onMounted, onUnmounted } from 'vue';
+  import { useRoute, useRouter } from 'vue-router';
+  import LockScreen from './lockscreen.vue';
+  import { useLockscreenStore } from './../../../store/modules/lockscreen';
+  import { LOGIN_NAME, REGISt, HosPITAL } from './../../../router/constant';
+  const router = useRouter();
+
+  const lockscreenStore = useLockscreenStore();
+  const route = useRoute();
+  const isLock = computed(() => lockscreenStore.isLock);
+  const lockTime = computed(() => lockscreenStore.lockTime);
+  const isMouted = ref(false);
+
+  let timer;
+
+  const timekeeping = () => {
+    clearInterval(timer);
+    if (route.name === LOGIN_NAME || isLock.value) return;
+    // 设置不锁屏
+    lockscreenStore.setLock(false);
+    // 重置锁屏时间
+    lockscreenStore.setLockTime();
+    timer = setInterval(() => {
+      // 锁屏倒计时递减
+      lockscreenStore.setLockTime(lockTime.value - 1);
+      if (lockTime.value <= 0) {
+        // 设置锁屏
+        lockscreenStore.setLock(true);
+        return clearInterval(timer);
+      }
+    }, 1000);
+  };
+  //只要从登录页登录 锁屏倒计时直接开启
+  router.afterEach((to, from) => {
+    if (from.name == LOGIN_NAME) {
+      setTimeout(() => {
+        timekeeping();
+      });
+    }
+  });
+  onMounted(() => {
+    timekeeping();
+    document.addEventListener('mousedown', timekeeping);
+    setTimeout(() => {
+      isMouted.value = true;
+    });
+  });
+
+  onUnmounted(() => document.removeEventListener('mousedown', timekeeping));
+</script>
+
+<style lang="less" scoped>
+  .slide-up-enter-active {
+    animation: slide-up 0.5s;
+  }
+
+  .slide-up-leave-active {
+    animation: slide-up 0.5s reverse;
+  }
+  @keyframes slide-up {
+    0% {
+      transform: translateY(-100%);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+</style>

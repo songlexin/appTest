@@ -1,0 +1,412 @@
+@import './mediaScreen.less';
+// 整体样式 直接覆盖
+@form-margin-bottom: 16px; //编辑状态下边距
+@form-static-margin-bottom: 12px; //只读状态下边距12 12-10 10为label 32-20
+@form-label-color: #646566; //取n7色号
+@form-select-disabled-background: #f7f8fa; //取n1色号
+@form-content-color: #323232; //取n8色号
+@input-height: 32px; //表单输入框高度
+@form-error-font: 12px; //表单提示文字大小
+@form-error-color: #d40000; //表单提示文字颜色
+@form-icon-color: #646566; //取n7色号
+@base-padding: 8px; //默认边距
+@base-desc-color: #969799; //默认说明文字颜色
+@form-options-desc-font: 14px; //默认条目说明文字大小
+@form-content-desc-font: 12px; //默认表单内容说明文字大小
+@collapse-border-color: #f2f3f5; //折叠下边框颜色
+@form-radio-margin: 24px; //radio项右边距
+
+@form-min-width: 160px; //form 最小宽度
+// 文字溢出
+.overflow-word() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 标题
+.base-title(@fontSize) {
+  font-size: @fontSize;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    font-size: @fontSize;
+    width: 4px;
+    margin-right: @base-padding;
+    height: @fontSize;
+    background-color: var(--ant-primary-color);
+  }
+}
+
+// 覆盖a-collapse
+.over-ant-collapse() {
+  background-color: transparent;
+
+  .ant-collapse-item {
+    .ant-collapse-header {
+      padding: 16px;
+      color: @form-content-color;
+    }
+
+    .ant-collapse-content {
+      .ant-collapse-content-box {
+        padding-top: 0;
+      }
+    }
+  }
+
+  &.ant-collapse-borderless {
+    .ant-collapse-item {
+      border-bottom: 1px solid @collapse-border-color;
+    }
+  }
+}
+
+// 覆盖ant-descriptions
+.over-ant-descriptions() {
+  .ant-descriptions-item {
+    padding-bottom: @form-static-margin-bottom;
+
+    .ant-descriptions-item-label {
+      color: @form-label-color;
+      font-weight: 400;
+    }
+
+    .ant-descriptions-item-content {
+      color: @form-content-color;
+      overflow: hidden;
+    }
+  }
+}
+// 覆盖radio
+.over-ant-radio() {
+  .ant-radio-wrapper {
+    margin-right: @form-radio-margin;
+  }
+}
+
+.ant-form {
+  // 表单标题
+  .form-title {
+    .base-title(14px);
+  }
+
+  // 表单条目说明文字
+  .form-item-description {
+    color: @base-desc-color;
+    font-size: @form-options-desc-font;
+  }
+
+  // 表单内容说明文字
+  .form-item-content-description {
+    color: @base-desc-color;
+    font-size: @form-content-desc-font;
+  }
+
+  .ant-form-item {
+    margin-bottom: @form-margin-bottom;
+    // 覆盖radio
+    .over-ant-radio();
+
+    .ant-form-item-explain {
+      //表单提示文字
+      position: absolute;
+      top: @input-height;
+      min-height: @form-margin-bottom;
+
+      .ant-form-item-explain-error {
+        line-height: @form-margin-bottom;
+        font-size: @form-error-font;
+        color: @form-error-color;
+      }
+    }
+
+    .ant-form-item-label {
+      // height: 32px;
+      // position: absolute;
+
+      .form-icon {
+        color: @form-icon-color;
+      }
+
+      > label {
+        color: @form-label-color;
+        // display: box;
+        // display: -webkit-box;
+        // -webkit-line-clamp: 2;
+        // -webkit-box-orient: vertical;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // text-align: right;
+        // height: 44px;
+      }
+    }
+
+    // 表单内容文字
+    .ant-form-item-control {
+      // padding-left:98px;
+      color: @form-content-color;
+    }
+
+    .ant-form-item-control-input {
+      min-width: 160px;
+    }
+  }
+}
+
+// 左右布局
+.ant-form-horizontal {
+  .ant-form-item-label {
+    overflow: initial;
+    // 98px;+8px +6px
+    width: 112px;
+    max-width: 112px;
+    // min-width: 98px;
+    // vertical-align: text-top;
+  }
+
+  // label折行
+  .ant-form-item-label > label {
+    word-wrap: break-word;
+    white-space: normal;
+  }
+}
+
+// 上下布局
+.ant-form-vertical {
+  .ant-form-item-label {
+    width: 100% !important;
+    padding: 0 0 4px;
+  }
+
+  .ant-form-item-label > label {
+    display: block;
+    .overflow-word();
+  }
+}
+
+// 静态详情
+.xc-static {
+  .static-form {
+    .ant-form-item {
+      //只读状态下边距12 12-10 10为label 32-20
+      // margin-bottom: @form-static-margin-bottom;
+      margin-bottom: 2px;
+    }
+
+    .ant-form-item-label > label::after {
+      content: ':';
+    }
+  }
+
+  .ant-collapse {
+    .over-ant-collapse();
+  }
+
+  .xc-title {
+    .base-title(14px);
+  }
+
+  .ant-descriptions {
+    .over-ant-descriptions();
+  }
+}
+// 显示引号
+.show-formItem-quato {
+  .ant-form-item-label > label::after {
+    content: ':';
+  }
+}
+
+// 排列布局
+.form-cols(@columns; @padding) {
+  .form-col-@{columns}-@{padding} {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: calc(@padding * -1px / 2);
+    margin-right: calc(@padding * -1px / 2);
+
+    .ant-form-item {
+      flex: 0 0 calc(100% / @columns);
+      max-width: calc(100% / @columns);
+      padding-left: calc(@padding * 1px / 2);
+      padding-right: calc(@padding * 1px / 2);
+    }
+  }
+}
+
+// 列数为1时
+.form-cols(1, 16);
+.form-cols(1, 24);
+
+// 列数为2时
+.form-cols(2, 16);
+.form-cols(2, 24);
+
+// 列数为3时
+.form-cols(3, 16);
+.form-cols(3, 24);
+
+// 列数为4时
+.form-cols(4, 16);
+.form-cols(4, 24);
+
+/* 筛选器内部标签通用样式 */
+._inner-label-form {
+  /* 初始化边距 */
+  padding: 0 !important;
+  margin: 0 !important;
+
+  &:first-child {
+    margin-left: 16px !important;
+  }
+
+  .ant-row:first-child {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+  }
+  /* 表单Col */
+  ._form-col {
+    // 筛选器列适配
+    #inner-label-form ._form-media-screen;
+
+    /* 上-右-下-左 */
+    padding: 0 16px 16px 0 !important;
+    margin: 0 !important;
+
+    /* 表单项样式 */
+    ._form-item {
+      margin: 0 !important;
+      padding: 0 !important;
+      min-width: 160px !important;
+
+      ._comp {
+        width: 100%;
+      }
+
+      .ant-select-multiple .ant-select-selection-placeholder {
+        padding-left: var(--label-width);
+      }
+      .ant-form-item-control-input-content {
+        .ant-picker-range .ant-picker-input input {
+          font-size: 12px;
+          padding-top: 2px;
+        }
+      }
+    }
+
+    /* 内部标签样式 */
+    ._inner-label {
+      display: flex;
+      position: absolute;
+      z-index: 2;
+      margin-left: 12px !important;
+      margin-right: 0px !important;
+      /* 暂时不设定最大宽度 */
+      max-width: unset;
+      width: auto;
+      /* 标签后缀 */
+      label::after {
+        content: ':';
+      }
+    }
+    /* 标签鼠标事件禁用 */
+    ._disable-pointer {
+      pointer-events: none;
+    }
+    /* 按钮边距 */
+    ._btn {
+      display: flex;
+      margin-left: 8px !important;
+    }
+  }
+  /* 按钮组靠右 */
+  ._form-col-btn-group {
+    text-align: end;
+    flex: auto;
+    max-width: 100%;
+    .ant-form-item-control-input-content {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+}
+
+._inner-label-form._form-col3 {
+  .form-item-col._form-col {
+    display: block;
+    flex: 0 0 calc(100% / 3);
+    max-width: calc(100% / 3);
+  }
+}
+
+// 筛选器边距兼容性适配-start
+// ._inner-label-form {
+//   margin: 16px 0 0 0 !important;
+// }
+// .xc-page:not(.xc-page.xc-content) {
+//   padding-top: 0px !important;
+//   .table-search-form._inner-label-form {
+//     & ~ .dy-table {
+//       // 分页器
+//       .ant-table-pagination {
+//         margin-bottom: calc(var(--inner-label-form-height) + 21px);
+//       }
+//       // 汇总
+//       .summary-table {
+//         margin-bottom: calc(var(--inner-label-form-height) + 21px - 3px);
+//       }
+//     }
+//   }
+// }
+
+// .xc-page:is(.xc-page.xc-content) {
+//   padding-top: 0px !important;
+// }
+// 筛选器边距兼容性适配-end
+
+// 筛选器边距
+.xc-page:has(._inner-label-form) {
+  & {
+    padding-top: 16px;
+  }
+  .xc-content:has(.table-search-form) {
+    ._inner-label-form ~ .dy-table {
+      // 分页器
+      .ant-table-pagination {
+        margin-bottom: calc(var(--inner-label-form-height) + 4px);
+      }
+      // 汇总
+      .summary-table {
+        margin-bottom: calc(var(--inner-label-form-height) - 3px);
+      }
+    }
+  }
+}
+
+._inner-label-form ~ .xc-page {
+  padding-top: 0;
+}
+
+.ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  color: @form-content-color!important;
+  background: @form-select-disabled-background!important;
+}
+
+.ant-input[disabled] {
+  color: @form-content-color!important;
+  background: @form-select-disabled-background!important;
+}
+
+.ant-picker-input > input[disabled]  {
+  color: @form-content-color!important;
+}
+
+.ant-picker.ant-picker-disabled {
+  background: @form-select-disabled-background!important;
+}

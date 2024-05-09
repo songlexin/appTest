@@ -1,0 +1,23 @@
+// 筛选器视口适配
+#inner-label-form() {
+  ._form-media-screen(@columns:1) {
+    /* 显示适配，可视宽度1280以下 每行显示3个 */
+    @media screen and(max-width: 1280px) {
+      display: block;
+      flex: 0 0 calc(100% / 3 * @columns);
+      max-width: calc(100% / 3 * @columns);
+    }
+    /* 显示适配，可视宽度1280-->1920以下 每行显示4个 */
+    @media screen and(min-width: 1280px) and(max-width: 1920px) {
+      display: block;
+      flex: 0 0 calc(100% / 4 * @columns);
+      max-width: calc(100% / 4 * @columns);
+    }
+    /** 显示适配，可视宽度超过1920 每行显示5个 */
+    @media screen and(min-width: 1920px) {
+      display: block;
+      flex: 0 0 calc(100% / 5 * @columns);
+      max-width: calc(100% / 5 * @columns);
+    }
+  }
+}

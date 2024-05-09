@@ -1,0 +1,99 @@
+// @import 'ant-design-vue/lib/style/themes/default.less';
+// @root-entry-name: variable;
+// @import 'ant-design-vue/dist/antd.dark.less';
+
+html:not(.dark) {
+  @component-background: @white;
+}
+
+// html.dark {
+// }
+
+.setStyle(@className, @propName) {
+  html {
+    &.dark {
+      .@{className} {
+        @{propName}: @black;
+      }
+    }
+
+    &:not(.dark) {
+      .@{className} {
+        @{propName}: @white;
+      }
+    }
+  }
+}
+
+.themeColor(@classNames, @i: 1) when(@i =< length(@classNames)) {
+  @className: extract(@classNames, @i);
+
+  .setStyle(@className, background-color);
+  .setStyle(@className, color);
+
+  .themeColor(@classNames, (@i + 1));
+}
+
+.themeTextColor(@classNames, @i: 1) when(@i =< length(@classNames)) {
+  @className: extract(@classNames, @i);
+  .setStyle(@className, color);
+  .themeColor(@classNames, (@i + 1));
+}
+
+.themeBgColor(@classNames, @i: 1) when(@i =< length(@classNames)) {
+  @className: extract(@classNames, @i);
+  .setStyle(@className, background-color);
+  .themeColor(@classNames, (@i + 1));
+}
+
+// 日期范围选择器颜色
+// 开始时间
+.ant-picker-cell-in-view.ant-picker-cell-range-start:not(
+    .ant-picker-cell-range-start-single
+  )::before,
+.ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single)::before {
+  background-color: var(--xc-cm1-color) !important;
+}
+// 开始时间与结束时间之间
+.ant-picker-cell-in-view.ant-picker-cell-in-range::before {
+  background-color: var(--xc-cm1-color) !important;
+}
+.ant-picker-date-panel
+  .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-start
+  .ant-picker-cell-inner::after,
+.ant-picker-date-panel
+  .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-end
+  .ant-picker-cell-inner::after {
+  background-color: var(--xc-cm2-color) !important;
+}
+.ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover::before,
+.ant-picker-cell-in-view.ant-picker-cell-range-start.ant-picker-cell-range-hover::before,
+.ant-picker-cell-in-view.ant-picker-cell-range-end.ant-picker-cell-range-hover::before,
+.ant-picker-cell-in-view.ant-picker-cell-range-start:not(
+    .ant-picker-cell-range-start-single
+  ).ant-picker-cell-range-hover-start::before,
+.ant-picker-cell-in-view.ant-picker-cell-range-end:not(
+    .ant-picker-cell-range-end-single
+  ).ant-picker-cell-range-hover-end::before,
+.ant-picker-panel
+  > :not(.ant-picker-date-panel)
+  .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-start::before,
+.ant-picker-panel
+  > :not(.ant-picker-date-panel)
+  .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-end::before {
+  background-color: var(--xc-cm2-color) !important;
+}
+// 范围选择虚线
+.ant-picker-cell-in-view.ant-picker-cell-range-hover-start:not(.ant-picker-cell-in-range):not(
+    .ant-picker-cell-range-start
+  ):not(.ant-picker-cell-range-end)::after,
+.ant-picker-cell-in-view.ant-picker-cell-range-hover-end:not(.ant-picker-cell-in-range):not(
+    .ant-picker-cell-range-start
+  ):not(.ant-picker-cell-range-end)::after,
+.ant-picker-cell-in-view.ant-picker-cell-range-hover-start.ant-picker-cell-range-start-single::after,
+.ant-picker-cell-in-view.ant-picker-cell-range-hover-start.ant-picker-cell-range-start.ant-picker-cell-range-end.ant-picker-cell-range-end-near-hover::after,
+.ant-picker-cell-in-view.ant-picker-cell-range-hover-end.ant-picker-cell-range-start.ant-picker-cell-range-end.ant-picker-cell-range-start-near-hover::after,
+.ant-picker-cell-in-view.ant-picker-cell-range-hover-end.ant-picker-cell-range-end-single::after,
+.ant-picker-cell-in-view.ant-picker-cell-range-hover:not(.ant-picker-cell-in-range)::after {
+  border-color: var(--xc-cm2-color) !important;
+}

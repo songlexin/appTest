@@ -1,0 +1,33 @@
+.unique-barcode {
+  display: inline-block;
+  width: 600px;
+  margin-right: 10px;
+  height: 32px;
+  box-sizing: border-box;
+  background-image: url('@/assets/images/barcode.png');
+  // background-size: 100% 100%;
+  line-height: 32px;
+  font-size: 14px;
+  color: #999;
+  padding-left: 16px;
+  cursor: pointer;
+  position: relative;
+  :deep(.ant-input-affix-wrapper:focus) {
+    box-shadow: none;
+  }
+
+  .unique-code-input {
+    position: absolute;
+    background: transparent;
+    border: 2px solid #c4c4c4;
+    line-height: 20px;
+    left: 0;
+    width: 100%;
+    :deep(input.ant-input) {
+      background: transparent !important;
+    }
+  }
+  .ant-btn {
+    margin-left: 600px;
+  }
+}

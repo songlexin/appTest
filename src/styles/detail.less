@@ -1,0 +1,102 @@
+// 详情
+.detail-wraper {
+  background-color: #fff;
+  padding: 0 16px 16px;
+  .detail-form {
+    margin-top: 8px;
+    .ant-form-item-label > label::after {
+      content: ':';
+    }
+
+    .ant-form-item {
+      margin-right: 0;
+      margin-bottom: 0;
+    }
+
+    .ant-form-item::after {
+      content: '|';
+      line-height: 14px;
+      color: #d8d8d8;
+      padding: 4px 8px;
+    }
+
+    .ant-form-item:last-child::after {
+      content: '';
+    }
+  }
+
+  .bold-form {
+    .ant-form-item-label > label {
+      color: #323232;
+      font-weight: 600;
+      height: 22px;
+      line-height: 22px;
+    }
+    .ant-form-item-control-input-content,
+    .ant-form-item-control-input {
+      height: 22px;
+      line-height: 22px;
+      min-height: 22px;
+    }
+
+    .ant-form-item-control {
+      color: #323232;
+      font-weight: 600;
+    }
+  }
+
+  .normal-form {
+    .ant-form-item-label > label {
+      color: #646566;
+      height: 22px;
+      line-height: 22px;
+    }
+    .ant-form-item-control-input-content,
+    .ant-form-item-control-input {
+      height: 22px;
+      line-height: 22px;
+      min-height: 22px;
+    }
+    .ant-form-item-control-input {
+      min-width: auto;
+    }
+
+    .ant-form-item-control {
+      color: #323232;
+    }
+
+    .ant-form-item::after {
+      padding: 4px 16px;
+    }
+  }
+
+  .flex-form {
+    .ant-form-item {
+      width: 25%;
+      margin-right: 0;
+    }
+
+    .ant-form-item::after {
+      content: '';
+    }
+  }
+
+  .base-title {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    font-weight: 600;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      font-size: 14px;
+      width: 4px;
+      margin-right: 8px;
+      height: 14px;
+      background-color: var(--ant-primary-color);
+    }
+  }
+}
