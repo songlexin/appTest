@@ -80,25 +80,6 @@ module.exports = {
 };
 ```
 
-### Custom rootValue
-
-If the size of the design draft is 750 or other sizes, you can adjust the `rootValue` to:
-
-```js
-// .postcssrc.js
-module.exports = {
-  plugins: {
-    // postcss-pxtorem version >= 5.0.0
-    'postcss-pxtorem': {
-      rootValue({ file }) {
-        return file.indexOf('vant') !== -1 ? 37.5 : 75;
-      },
-      propList: ['*'],
-    },
-  },
-};
-```
-
 ## Recommended IDE Setup
 
 - [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
