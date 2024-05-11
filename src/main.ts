@@ -4,6 +4,8 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import { setupStore } from '@/store';
 import { setupAntd } from '@/plugins/antd';
+import { CForm, CFormItem } from '@/components/custom';
+
 import router from './router';
 import '@/assets/iconfont/iconfont.css';
 import 'virtual:svg-icons-register';
@@ -15,5 +17,7 @@ const app = createApp(App);
 dayjs.locale('zh-ch');
 setupStore(app);
 setupAntd(app);
+app.component('CForm', CForm);
+app.component('CFormItem', CFormItem);
 app.use(router);
 app.mount('#app');
