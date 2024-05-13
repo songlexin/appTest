@@ -11,6 +11,9 @@ export default defineComponent({
       type: String as PropType<'inline' | 'horizontal' | 'vertical'>,
       default: 'vertical',
     },
+    labelCol: {
+      type: Object as PropType<object>,
+    },
     wrapperCol: {
       type: Object as PropType<object>,
     },
@@ -33,10 +36,11 @@ export default defineComponent({
     });
     return () => (
       <Form
-        class={attrs.class ? `cform ${attrs.class}` : 'cform'}
         ref={formRef}
-        {...omit(attrs, ['layout', 'class', 'wrapperCol'])}
-        {...props}
+        {...omit(attrs, ['class'])}
+        class={attrs.class ? `cform ${attrs.class}` : 'cform'}
+        layout={props.layout}
+        labelCol={props.layout == 'vertical' ? { span: 24 } : props.labelCol}
         wrapperCol={props.layout == 'vertical' ? { flex: 1 } : props.wrapperCol}
       >
         <Row gutter={props.gutter}>{slots.default?.()}</Row>

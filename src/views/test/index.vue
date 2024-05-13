@@ -6,8 +6,6 @@
       ref="cformRef"
       :model="formState"
       name="basic"
-      :label-col="{ span: 8 }"
-      :wrapper-col="{ span: 16 }"
       autocomplete="off"
       @finish="onFinish"
       @finishFailed="onFinishFailed"
@@ -25,7 +23,7 @@
         <a-input v-model:value="formState.username" style="width: 100%" />
       </c-form-item>
       <c-form-item
-        label="合规"
+        label="合规33334343453454353xs"
         name="password"
         :rules="[{ required: true, message: 'Please input your password!' }]"
       >
