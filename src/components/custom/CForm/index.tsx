@@ -3,18 +3,21 @@ import { Form, Row } from 'ant-design-vue';
 import type { FormExpose } from 'ant-design-vue/es/form/Form';
 import { provide } from 'vue';
 import { omit } from 'lodash-es';
+import './index.less';
 
 export default defineComponent({
   props: {
-    isLoading: String as PropType<string>,
     layout: {
       type: String as PropType<'inline' | 'horizontal' | 'vertical'>,
       default: 'vertical',
     },
+    wrapperCol: {
+      type: Object as PropType<object>,
+    },
     span: Number as PropType<number>,
     gutter: {
       type: Number as PropType<number>,
-      default: 16,
+      default: 24,
     },
   },
   setup(props, { slots, attrs, expose }) {
@@ -30,10 +33,11 @@ export default defineComponent({
     });
     return () => (
       <Form
+        class={attrs.class ? `cform ${attrs.class}` : 'cform'}
         ref={formRef}
-        {...omit(attrs, ['layout'])}
+        {...omit(attrs, ['layout', 'class', 'wrapperCol'])}
         {...props}
-        wrapperCol={props.layout == 'vertical' ? { flex: 1 } : {}}
+        wrapperCol={props.layout == 'vertical' ? { flex: 1 } : props.wrapperCol}
       >
         <Row gutter={props.gutter}>{slots.default?.()}</Row>
       </Form>
