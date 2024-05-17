@@ -1,108 +1,564 @@
 <template>
-  <div style="width: 100%">
-    <c-form
-      span="6"
-      is-loading="ddd"
-      ref="cformRef"
-      :model="formState"
-      name="basic"
-      autocomplete="off"
-      @finish="onFinish"
-      @finishFailed="onFinishFailed"
-    >
-      <c-form-item
-        name="username"
-        :rules="[{ required: true, message: 'Please input your username!' }]"
-      >
-        <template #label>
-          <span>
-            合规
-            <!-- <span class="icon iconfont icon-icon_sider_menu_ghgxsq"></span> -->
-          </span>
-        </template>
-        <a-input v-model:value="formState.username" style="width: 100%" />
-      </c-form-item>
-      <c-form-item
-        label="合规33334343453454353xs"
-        name="password"
-        :rules="[{ required: true, message: 'Please input your password!' }]"
-      >
-        <a-input-password v-model:value="formState.password" />
-      </c-form-item>
-      <c-form-item
-        label="合规"
-        name="password"
-        :rules="[{ required: true, message: 'Please input your password!' }]"
-      >
-        <a-select ref="select" v-model:value="value1" style="width: 120px">
-          <a-select-option value="jack">Jack</a-select-option>
-          <a-select-option value="lucy">Lucy</a-select-option>
-          <a-select-option value="disabled" disabled>Disabled</a-select-option>
-          <a-select-option value="Yiminghe">yiminghe</a-select-option>
-        </a-select>
-      </c-form-item>
-      <c-form-item
-        label="Password2"
-        name="password222"
-        :rules="[{ required: true, message: 'Please input your password!' }]"
-      >
-        <a-input-password v-model:value="formState.password222" />
-      </c-form-item>
-      <c-form-item
-        label="Password32"
-        name="password23"
-        :rules="[{ required: true, message: 'Please input your password!' }]"
-      >
-        <a-input-password v-model:value="formState.password23" />
-      </c-form-item>
-      <c-form-item
-        label="Password32"
-        name="password235"
-        :rules="[{ required: true, message: 'Please input your password!' }]"
-      >
-        <a-input-password v-model:value="formState.password235" />
-      </c-form-item>
-      <c-form-item :wrapper-col="{ offset: 8, span: 8 }">
-        <a-button type="primary" html-type="submit">Submit</a-button>
-      </c-form-item>
-    </c-form>
-  </div>
+  <a-descriptions title="User Info">
+    <a-descriptions-item label="UserName">Zhou Maomao</a-descriptions-item>
+    <a-descriptions-item label="Telephone">1810000000</a-descriptions-item>
+    <a-descriptions-item label="Live">Hangzhou, Zhejiang</a-descriptions-item>
+    <a-descriptions-item label="Remark">empty</a-descriptions-item>
+    <a-descriptions-item label="Address">
+      No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+    </a-descriptions-item>
+  </a-descriptions>
 </template>
-
 <script setup lang="ts">
   // import CForm from '@/components/custom/CForm';
-
+  import { cloneDeep } from 'lodash-es';
   import { onMounted, provide, reactive, ref } from 'vue';
   import type { FormExpose } from 'ant-design-vue/es/form/Form';
 
   const cformRef = ref<FormExpose>();
 
-  interface FormState {
-    username: string;
-    password: string;
-    password222: string;
-    password23: string;
-    password235: string;
-    remember: boolean;
-  }
-  const value1 = ref('lucy');
-
-  const formState = reactive<FormState>({
-    username: '',
-    password: '',
-    password222: '',
-    password23: '',
-    password235: '',
-    remember: true,
+  const arr = [
+    {
+      id: '1789112021125275649',
+      lastModified: '2024-05-11 09:55:29',
+      version: 0,
+      createTime: '2024-05-11 09:55:29',
+      createUser: 'JDE-ST',
+      lastModifiedUser: 'JDE-ST',
+      taxId: '911401000519917489',
+      companyCode: 'h00025',
+      companyName: '国药集团山西医疗器械有限公司',
+      custCode: '194',
+      custName: '国药集团山西医疗器械有限公司',
+      receivableCustomerFlag: 1,
+      creditLevel: null,
+      creditLimit: null,
+      volumeLimit: null,
+      reagentTerm: null,
+      consumerGoodsTerm: null,
+      spdConsumerGoodsTerm: null,
+      deviceTerm: null,
+      maintainSrvFeeTerm: null,
+      techSrvFeeTerm: null,
+      purVolumeTerm: null,
+      remark: null,
+      finishInitFlag: null,
+      ext01: null,
+      ext02: null,
+      ext03: null,
+      ext04: null,
+      ext05: null,
+      ext06: null,
+      ext07: null,
+      ext08: null,
+      ext09: null,
+      ext10: null,
+      createUserName: 'JDE-ST',
+      lastModifiedUserName: 'JDE-ST',
+      periodList: [
+        {
+          id: '1789112025869033474',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194',
+          custName: '国药集团山西医疗器械有限公司',
+          accountKindCode: '02',
+          accountKindName: 'SPD耗材',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033475',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194',
+          custName: '国药集团山西医疗器械有限公司',
+          accountKindCode: '03',
+          accountKindName: '设备',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033476',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194',
+          custName: '国药集团山西医疗器械有限公司',
+          accountKindCode: '04',
+          accountKindName: '设备质保金',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033477',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194',
+          custName: '国药集团山西医疗器械有限公司',
+          accountKindCode: '05',
+          accountKindName: '维修服务费',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033478',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194',
+          custName: '国药集团山西医疗器械有限公司',
+          accountKindCode: '06',
+          accountKindName: '技术服务费',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033479',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194',
+          custName: '国药集团山西医疗器械有限公司',
+          accountKindCode: '07',
+          accountKindName: '带量采购',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033480',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194',
+          custName: '国药集团山西医疗器械有限公司',
+          accountKindCode: '08',
+          accountKindName: '耗材',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033481',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194',
+          custName: '国药集团山西医疗器械有限公司',
+          accountKindCode: '09',
+          accountKindName: 'SPD服务费',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789953283814592514',
+          lastModified: '2024-05-13 19:55:27',
+          version: 3,
+          createTime: '2024-05-13 17:38:08',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194',
+          custName: '国药集团山西医疗器械有限公司',
+          accountKindCode: '23',
+          accountKindName: '121111',
+          accountPeriod: null,
+          remark: null,
+          enableFlag: 1,
+          createUserName: 'JDE-ST',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789978249503289345',
+          lastModified: '2024-05-17 09:13:22',
+          version: 1,
+          createTime: '2024-05-13 19:17:20',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194',
+          custName: '国药集团山西医疗器械有限公司',
+          accountKindCode: '24',
+          accountKindName: '1222',
+          accountPeriod: null,
+          remark: null,
+          enableFlag: 1,
+          createUserName: 'JDE-ST',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1791274541855670273',
+          lastModified: '2024-05-17 09:13:30',
+          version: 1,
+          createTime: '2024-05-17 09:08:24',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194',
+          custName: '国药集团山西医疗器械有限公司',
+          accountKindCode: '25',
+          accountKindName: '质保金99',
+          accountPeriod: null,
+          remark: null,
+          enableFlag: 1,
+          createUserName: 'JDE-ST',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1791275884406243329',
+          lastModified: '2024-05-17 09:13:44',
+          version: 0,
+          createTime: '2024-05-17 09:13:44',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194',
+          custName: '国药集团山西医疗器械有限公司',
+          accountKindCode: '26',
+          accountKindName: '耗材112',
+          accountPeriod: null,
+          remark: null,
+          enableFlag: 1,
+          createUserName: 'JDE-ST',
+          lastModifiedUserName: 'JDE-ST',
+        },
+      ],
+    },
+    {
+      id: '1789112021125275650',
+      lastModified: '2024-05-11 09:55:29',
+      version: 0,
+      createTime: '2024-05-11 09:55:29',
+      createUser: 'JDE-ST',
+      lastModifiedUser: 'JDE-ST',
+      taxId: '',
+      companyCode: 'h00025',
+      companyName: '国药集团山西医疗器械有限公司',
+      custCode: '194007',
+      custName: '物流部',
+      receivableCustomerFlag: 1,
+      creditLevel: null,
+      creditLimit: null,
+      volumeLimit: null,
+      reagentTerm: null,
+      consumerGoodsTerm: null,
+      spdConsumerGoodsTerm: null,
+      deviceTerm: null,
+      maintainSrvFeeTerm: null,
+      techSrvFeeTerm: null,
+      purVolumeTerm: null,
+      remark: null,
+      finishInitFlag: null,
+      ext01: null,
+      ext02: null,
+      ext03: null,
+      ext04: null,
+      ext05: null,
+      ext06: null,
+      ext07: null,
+      ext08: null,
+      ext09: null,
+      ext10: null,
+      createUserName: 'JDE-ST',
+      lastModifiedUserName: 'JDE-ST',
+      periodList: [
+        {
+          id: '1789112025869033483',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194007',
+          custName: '物流部',
+          accountKindCode: '02',
+          accountKindName: 'SPD耗材',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033484',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194007',
+          custName: '物流部',
+          accountKindCode: '03',
+          accountKindName: '设备',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033485',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194007',
+          custName: '物流部',
+          accountKindCode: '04',
+          accountKindName: '设备质保金',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033486',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194007',
+          custName: '物流部',
+          accountKindCode: '05',
+          accountKindName: '维修服务费',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033487',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194007',
+          custName: '物流部',
+          accountKindCode: '06',
+          accountKindName: '技术服务费',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033488',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194007',
+          custName: '物流部',
+          accountKindCode: '07',
+          accountKindName: '带量采购',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033489',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194007',
+          custName: '物流部',
+          accountKindCode: '08',
+          accountKindName: '耗材',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789112025869033490',
+          lastModified: '2024-05-11 09:55:30',
+          version: 0,
+          createTime: '2024-05-11 09:55:30',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194007',
+          custName: '物流部',
+          accountKindCode: '09',
+          accountKindName: 'SPD服务费',
+          accountPeriod: 100,
+          remark: null,
+          enableFlag: 1,
+          createUserName: '1234',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789953283814592515',
+          lastModified: '2024-05-13 19:55:27',
+          version: 3,
+          createTime: '2024-05-13 17:38:08',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194007',
+          custName: '物流部',
+          accountKindCode: '23',
+          accountKindName: '121111',
+          accountPeriod: null,
+          remark: null,
+          enableFlag: 1,
+          createUserName: 'JDE-ST',
+          lastModifiedUserName: 'JDE-ST',
+        },
+        {
+          id: '1789978249503289346',
+          lastModified: '2024-05-17 09:13:22',
+          version: 1,
+          createTime: '2024-05-13 19:17:20',
+          createUser: 'JDE-ST',
+          lastModifiedUser: 'JDE-ST',
+          companyCode: 'h00025',
+          companyName: '国药集团山西医疗器械有限公司',
+          custCode: '194007',
+          custName: '物流部',
+          accountKindCode: '24',
+          accountKindName: '1222',
+          accountPeriod: null,
+          remark: null,
+          enableFlag: 1,
+          createUserName: 'JDE-ST',
+          lastModifiedUserName: 'JDE-ST',
+        },
+      ],
+    },
+  ];
+  const state = reactive({
+    data: arr,
+    columns: [],
   });
 
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-    console.log(' cformRef.value.getFieldsValue();', cformRef.value.getFieldsValue());
-  };
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
-</script>
+  const getPeriodList = (arr) => {
+    let dataSource = [];
+    let columns = [];
+    const myMap = new Map([]);
+    if (arr.length) {
+      arr.forEach((item) => {
+        myMap.set(item.accountKindName, item.accountPeriod);
+      });
+      const obj = Object.fromEntries(myMap);
+      // newArray = Array.from(myMap).reduce((result, [key, value]) => {
+      //   result.push({ accountKindName: key, accountPeriod: value });
+      //   return result;
+      // }, []);
+      Object.keys(obj).forEach((key) => {
+        columns.push({
+          dataIndex: key,
+          title: key,
+        });
+      });
+      dataSource.push(obj);
+      console.log('dataSource', dataSource);
+    }
 
-<style lang="less" scoped></style>
+    return [columns, dataSource];
+  };
+  const dataConversion = (arr) => {
+    if (arr.length) {
+      arr.forEach((item) => {
+        const [columns, dataSource] = getPeriodList(item.periodList);
+
+        console.log('columns', columns);
+        console.log('dataSource', dataSource);
+      });
+    }
+  };
+  onMounted(() => {
+    dataConversion(state.data);
+    // state.dataSource =  dataConversion(arr);
+  });
+</script>
