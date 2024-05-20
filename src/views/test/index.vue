@@ -1,13 +1,16 @@
 <template>
-  <a-descriptions title="User Info">
-    <a-descriptions-item label="UserName">Zhou Maomao</a-descriptions-item>
-    <a-descriptions-item label="Telephone">1810000000</a-descriptions-item>
-    <a-descriptions-item label="Live">Hangzhou, Zhejiang</a-descriptions-item>
-    <a-descriptions-item label="Remark">empty</a-descriptions-item>
-    <a-descriptions-item label="Address">
-      No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
-    </a-descriptions-item>
-  </a-descriptions>
+  <div>
+    <a-table :columns="state.columns" :data-source="state.dataSource"> </a-table>
+    <a-descriptions title="User Info">
+      <a-descriptions-item label="UserName">Zhou Maomao</a-descriptions-item>
+      <a-descriptions-item label="Telephone">1810000000</a-descriptions-item>
+      <a-descriptions-item label="Live">Hangzhou, Zhejiang</a-descriptions-item>
+      <a-descriptions-item label="Remark">empty</a-descriptions-item>
+      <a-descriptions-item label="Address">
+        No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+      </a-descriptions-item>
+    </a-descriptions>
+  </div>
 </template>
 <script setup lang="ts">
   // import CForm from '@/components/custom/CForm';
@@ -515,8 +518,21 @@
     },
   ];
   const state = reactive({
-    data: arr,
-    columns: [],
+    dataSource: arr,
+    columns: [
+      {
+        title: '上次修改日期',
+        dataIndex: 'lastModified',
+      },
+      {
+        title: '种类',
+        dataIndex: 'accountKindName',
+      },
+      {
+        title: '天数',
+        dataIndex: 'accountPeriod',
+      },
+    ],
   });
 
   const dataConversion = (arr) => {
@@ -540,7 +556,8 @@
     return temp;
   };
   onMounted(() => {
-    const arr = dataConversion(state.data);
-    console.log('arr', arr);
+    const _arr = dataConversion(arr);
+    state.dataSource = _arr;
+    console.log('_arr', _arr);
   });
 </script>
