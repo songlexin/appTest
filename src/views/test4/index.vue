@@ -1,22 +1,21 @@
 <template>
-  <a-descriptions title="User Info">
-    <a-descriptions-item label="UserName">Zhou Maomao</a-descriptions-item>
-    <a-descriptions-item label="Telephone">1810000000</a-descriptions-item>
-    <a-descriptions-item label="Live">Hangzhou, Zhejiang</a-descriptions-item>
-    <a-descriptions-item label="Remark">empty</a-descriptions-item>
-    <a-descriptions-item label="Address">
-      No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
-    </a-descriptions-item>
-  </a-descriptions>
+  <div>
+    <a-table :columns="state.columns" :data-source="state.dataSource"> </a-table>
+    <a-descriptions title="User Info">
+      <a-descriptions-item label="UserName">Zhou Maomao</a-descriptions-item>
+      <a-descriptions-item label="Telephone">1810000000</a-descriptions-item>
+      <a-descriptions-item label="Live">Hangzhou, Zhejiang</a-descriptions-item>
+      <a-descriptions-item label="Remark">empty</a-descriptions-item>
+      <a-descriptions-item label="Address">
+        No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+      </a-descriptions-item>
+    </a-descriptions>
+  </div>
 </template>
 <script setup lang="ts">
   // import CForm from '@/components/custom/CForm';
   import { cloneDeep } from 'lodash-es';
-  import { onMounted, provide, reactive, ref } from 'vue';
-  import type { FormExpose } from 'ant-design-vue/es/form/Form';
-  import { table } from 'console';
-
-  const cformRef = ref<FormExpose>();
+  import { onMounted, reactive } from 'vue';
 
   const arr = [
     {
@@ -519,45 +518,23 @@
     },
   ];
   const state = reactive({
-    data: arr,
-    columns: [],
+    dataSource: arr,
+    columns: [
+      {
+        title: '上次修改日期',
+        dataIndex: 'lastModified',
+      },
+      {
+        title: '种类',
+        dataIndex: 'accountKindName',
+      },
+      {
+        title: '天数',
+        dataIndex: 'accountPeriod',
+      },
+    ],
   });
 
-  const getPeriodList = (arr) => {
-    let dataSource = [];
-    let columns = [];
-    const myMap = new Map([]);
-    if (arr.length) {
-      arr.forEach((item) => {
-        myMap.set(item.accountKindName, item.accountPeriod);
-      });
-      const obj = Object.fromEntries(myMap);
-      // newArray = Array.from(myMap).reduce((result, [key, value]) => {
-      //   result.push({ accountKindName: key, accountPeriod: value });
-      //   return result;
-      // }, []);
-      Object.keys(obj).forEach((key) => {
-        columns.push({
-          dataIndex: key,
-          title: key,
-        });
-      });
-      dataSource.push(obj);
-      console.log('dataSource', dataSource);
-    }
-
-    return [columns, dataSource];
-  };
-  const dataConversion1 = (arr) => {
-    if (arr.length) {
-      arr.forEach((item) => {
-        const [columns, dataSource] = getPeriodList(item.periodList);
-
-        console.log('columns', columns);
-        console.log('dataSource', dataSource);
-      });
-    }
-  };
   const dataConversion = (arr) => {
     let temp = [];
     if (arr.length) {
@@ -579,8 +556,8 @@
     return temp;
   };
   onMounted(() => {
-    const arr = dataConversion(state.data);
-    console.log('arr', arr);
-    // state.dataSource =  dataConversion(arr);
+    const _arr = dataConversion(arr);
+    state.dataSource = _arr;
+    console.log('_arr', _arr);
   });
 </script>

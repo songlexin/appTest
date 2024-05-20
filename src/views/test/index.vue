@@ -13,7 +13,6 @@
   </div>
 </template>
 <script setup lang="ts">
-  // import CForm from '@/components/custom/CForm';
   import { cloneDeep } from 'lodash-es';
   import { onMounted, reactive } from 'vue';
 
@@ -518,7 +517,8 @@
     },
   ];
   const state = reactive({
-    dataSource: arr,
+    data: arr,
+    dataSource: [],
     columns: [
       {
         title: '上次修改日期',
@@ -535,29 +535,61 @@
     ],
   });
 
-  const dataConversion = (arr) => {
-    let temp = [];
+  const getPeriodList = (arr) => {
+    let dataSource = [];
+    let columns = [];
+    const myMap = new Map([]);
     if (arr.length) {
       arr.forEach((item) => {
-        if (item.periodList.length) {
-          item.periodList.forEach((_item) => {
-            const obj = cloneDeep(item);
-            delete obj.periodList;
-            obj.accountKindCode = _item.accountKindCode;
-            obj.accountKindName = _item.accountKindName;
-            obj.accountPeriod = _item.accountPeriod;
-            temp.push(obj);
-          });
-        } else {
-          temp.push(item);
-        }
+        myMap.set(item.accountKindName, item.accountPeriod);
+      });
+      const obj = Object.fromEntries(myMap);
+      Object.keys(obj).forEach((key) => {
+        columns.push({
+          dataIndex: key,
+          title: key,
+        });
+      });
+      dataSource.push(obj);
+    }
+
+    return [columns, dataSource];
+  };
+
+  const setColumns = (columns) => {
+    const set = new Set(cloneDeep(state.columns));
+    columns.forEach((item) => {
+      set.add(item);
+    });
+
+    const result = [...set].filter((item, index, self) => {
+      return self.findIndex((t) => JSON.stringify(t) === JSON.stringify(item)) === index;
+    });
+    state.columns = result;
+    console.log(' state.columns', state.columns);
+  };
+  const dataConversion = (arr) => {
+    let _arr = [];
+    if (arr.length) {
+      _arr = arr.map((item) => {
+        const [columns, dataSource] = getPeriodList(item.periodList);
+        setColumns(columns);
+        const obj = {
+          ...item,
+          ...dataSource[0],
+        };
+        delete obj.periodList;
+        return obj;
       });
     }
-    return temp;
+
+    return _arr;
   };
+
   onMounted(() => {
-    const _arr = dataConversion(arr);
-    state.dataSource = _arr;
+    const _arr = dataConversion(state.data);
     console.log('_arr', _arr);
+    state.dataSource = _arr;
+    // state.dataSource =  dataConversion(arr);
   });
 </script>
