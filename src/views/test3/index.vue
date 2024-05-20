@@ -12,7 +12,10 @@
 <script setup lang="ts">
   // import CForm from '@/components/custom/CForm';
   import { cloneDeep } from 'lodash-es';
-  import { onMounted, reactive } from 'vue';
+  import { onMounted, provide, reactive, ref } from 'vue';
+  import type { FormExpose } from 'ant-design-vue/es/form/Form';
+
+  const cformRef = ref<FormExpose>();
 
   const arr = [
     {
@@ -519,6 +522,41 @@
     columns: [],
   });
 
+  const getPeriodList = (arr) => {
+    let dataSource = [];
+    let columns = [];
+    const myMap = new Map([]);
+    if (arr.length) {
+      arr.forEach((item) => {
+        myMap.set(item.accountKindName, item.accountPeriod);
+      });
+      const obj = Object.fromEntries(myMap);
+      // newArray = Array.from(myMap).reduce((result, [key, value]) => {
+      //   result.push({ accountKindName: key, accountPeriod: value });
+      //   return result;
+      // }, []);
+      Object.keys(obj).forEach((key) => {
+        columns.push({
+          dataIndex: key,
+          title: key,
+        });
+      });
+      dataSource.push(obj);
+      console.log('dataSource', dataSource);
+    }
+
+    return [columns, dataSource];
+  };
+  const dataConversion1 = (arr) => {
+    if (arr.length) {
+      arr.forEach((item) => {
+        const [columns, dataSource] = getPeriodList(item.periodList);
+
+        console.log('columns', columns);
+        console.log('dataSource', dataSource);
+      });
+    }
+  };
   const dataConversion = (arr) => {
     let temp = [];
     if (arr.length) {
@@ -542,5 +580,6 @@
   onMounted(() => {
     const arr = dataConversion(state.data);
     console.log('arr', arr);
+    // state.dataSource =  dataConversion(arr);
   });
 </script>
