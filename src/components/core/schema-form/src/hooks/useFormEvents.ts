@@ -205,7 +205,7 @@ export function useFormEvents(formActionContext: UseFormActionContext) {
       });
     });
 
-    unref(formPropsRef).schemas = uniqBy(schemas, 'field');
+    unref(formPropsRef as any).schemas = uniqBy(schemas, 'field');
   };
 
   async function resetFields(): Promise<void> {

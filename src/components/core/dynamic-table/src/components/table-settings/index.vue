@@ -1,5 +1,5 @@
 <template>
-  <Space :size="8">
+  <Space :size="8" class="ml-16px">
     <FullSetting v-if="fullType" :fullType="fullType" />
     <ColumnSetting :placementType="placementType" />
     <!-- <SizeSetting /> -->

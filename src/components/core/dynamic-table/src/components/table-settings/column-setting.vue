@@ -219,7 +219,10 @@
 </template>
 
 <script lang="ts" setup>
+  // 表格设置不以ID为核心，全自动以url为key
+  import TABLE_NAMES from './tableState';
   import { nextTick, ref, unref, watchEffect } from 'vue';
+  import { nanoid } from 'nanoid';
   import { SettingOutlined } from '@ant-design/icons-vue';
   import { cloneDeep } from 'lodash-es';
   import { Tooltip, Popover, Divider } from 'ant-design-vue';
@@ -237,7 +240,7 @@
   // import { useThemeStore } from './../../../../../../store/modules/projectConfig';
   import type { TableColumn } from '../../types/column';
   import type { TableProps } from 'ant-design-vue/es/table/Table';
-
+  import { useRoute } from 'vue-router';
   // import { groupBy } from 'lodash-es';
   const props = defineProps({
     placementType: {
@@ -245,13 +248,12 @@
       default: 'leftTop',
     },
   });
-
   const userStore = useUserStore();
   const corpId = userStore.userInfo.corpId;
   const projectCode = getRunProject();
   // const themeStore = useThemeStore();
   const userId = getUserId();
-
+  const route = useRoute();
   // type TableColumnType<T = any> = TableColumn<T> & {
   //   /** 目的是解决：类型实例化过深，且可能无限 */
   //   formItemProps?: any;
@@ -262,15 +264,25 @@
   type SizeType = NonNullable<TableProps['size']>;
   // 表格大小
   const selectedKeysRef = ref<SizeType>(unref(table.getProps)?.size || 'small');
+
+  const TABLE_NAME_KEY = `TABLE${route.fullPath.toUpperCase().replace(/\//g, '-')}`;
+  TABLE_NAMES.set(TABLE_NAME_KEY, (TABLE_NAMES.get(TABLE_NAME_KEY) || 0) + 1);
+
+  const TABLE_NAME = `${TABLE_NAME_KEY}`;
+
+  console.log(TABLE_NAME);
   function sizeChange() {
     table.setProps({
       size: selectedKeysRef.value,
     });
+
+    updateOrInsertTable();
   }
 
-  const tableName = table.tableName;
+  // const tableName = table.tableName||nanoid();
+  const tableName = TABLE_NAME;
 
-  let tableId = null;
+  let tableId = ref();
   let inited = false;
 
   let defaultShowIndex = !!table.showIndex;
@@ -279,28 +291,20 @@
   let defaultColumns = cloneDeep(table.columns);
   const tableColumns = ref([] as any[]);
 
-  // const checkAll = computed<boolean>({
-  //   get() {
-  //     return tableColumns.value.length > 0 && tableColumns.value.every((n) => !n.hideInTable);
-  //   },
-  //   set(value) {
-  //     tableColumns.value.forEach((item) => (item.hideInTable = !value));
-  //   },
-  // });
-
   const checkIndex = ref(defaultShowIndex);
   const checkBordered = ref(table.bordered);
   const columnListRef = ref<HTMLDivElement>();
 
-  // 初始化选中状态
   const initCheckStatus = async () => {
+    table.setProps({ loading: true });
     const dataProp = await sysProjectTableTableSetting({
       corpId: userStore.userInfo.corpId,
       projectCode,
       tableName,
       userId,
     });
-    tableId = dataProp?.id;
+
+    tableId.value = dataProp?.id;
     if (dataProp && dataProp.columns && dataProp.columns.length) {
       const temp: any = cloneDeep(table.columns);
       for (let i = 0; i < temp.length; i++) {
@@ -327,7 +331,10 @@
     }
     defaultBordered = dataProp.bordered;
     defaultShowIndex = dataProp.showIndex;
-    table.setProps({ showIndex: defaultShowIndex });
+    table.setProps({ showIndex: defaultShowIndex, size: dataProp?.size || 'small' });
+    nextTick(() => {
+      table.setProps({ loading: false });
+    });
     resetInit();
   };
 
@@ -342,7 +349,7 @@
 
   resetInit();
   initCheckStatus();
-  sizeChange();
+  // sizeChange();
 
   // const indeterminate = computed(() => {
   //   return (
@@ -407,20 +414,22 @@
       columns: [...columsItem],
       tableName,
       projectCode,
+      size: selectedKeysRef.value,
       userId,
       corpId,
     };
-    if (tableId) {
+    if (tableId.value) {
       updateTableSetting(params);
     } else {
       await sysProjectTableInsert(params);
+
       const res = await sysProjectTableTableSetting({
         corpId,
         projectCode,
         tableName,
         userId,
       });
-      tableId = res?.id;
+      tableId.value = res?.id;
     }
   };
 
@@ -507,10 +516,38 @@
 </script>
 
 <style lang="less" scoped>
+  @primary-color: #00f;
+  .check-item {
+    align-items: center;
+  }
+  .column-fixed {
+    .fixed-right,
+    .fixed-left {
+      &.active,
+      &:hover {
+        color: @primary-color;
+      }
+      // &.disabledIcon {
+      //   color: #f2f3f5;
+      //   cursor: not-allowed;
+      // }
+    }
+  }
+
   // .columnListRefLeft,
   // .columnListRefNormal {
   //   border-bottom: 1px dashed @primary-color;
   // }
+
+  .columnListRefLeft + .columnListRefNormal {
+    border-top: 1px dashed @primary-color;
+  }
+  .columnListRefLeft + .columnListRefRight {
+    border-top: 1px dashed @primary-color;
+  }
+  .columnListRefNormal + .columnListRefRight {
+    border-top: 1px dashed @primary-color;
+  }
 
   .popover-title {
     height: 44px;

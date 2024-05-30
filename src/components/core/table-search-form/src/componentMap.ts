@@ -2,23 +2,20 @@
  * Component list, register here to setting it in the form
  */
 import {
-  Input,
-  Select,
-  // Radio,
-  // Checkbox,
   AutoComplete,
   Cascader,
+  // Radio,
+  Checkbox,
   DatePicker,
+  Input,
   InputNumber,
+  Select,
   // Switch,
   TimePicker,
-  TreeSelect,
   Tree,
-  // Slider,
-  // Rate,
-  // Divider,
-  // Upload,
+  TreeSelect,
 } from 'ant-design-vue';
+import * as TableDynamicSearch from './table-dynamic-search';
 
 // const componentMap = {
 //   Input,
@@ -33,8 +30,8 @@ import {
 //   Tree,
 //   Switch,
 //   RadioGroup: Radio.Group,
-//   Checkbox,
-//   CheckboxGroup: Checkbox.Group,
+// Checkbox,
+// CheckboxGroup: Checkbox.Group,
 //   Cascader,
 //   Slider,
 //   Rate,
@@ -63,6 +60,11 @@ const innerLabelMap = {
   MonthPicker: DatePicker.MonthPicker,
   RangePicker: DatePicker.RangePicker,
   TimePicker,
+  DynamicInput: TableDynamicSearch.DynamicInput,
+  DynamicSelect: TableDynamicSearch.DynamicSelect,
+  DynamicTreeSelect: TableDynamicSearch.DynamicTreeSelect,
+  Checkbox,
+  CheckboxGroup: Checkbox.Group,
 };
 
 /* 需要为标签禁用point-events的组件 */

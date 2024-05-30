@@ -1,7 +1,7 @@
-import dayjs from 'dayjs';
-import type { RuleObject } from 'ant-design-vue/es/form/';
-import type { ComponentMapType } from './types/component';
 import { isNumber } from '@/utils/is';
+import type { RuleObject } from 'ant-design-vue/es/form/';
+import dayjs from 'dayjs';
+import type { ComponentMapType } from './types/component';
 
 /**
  * @description: 生成placeholder
@@ -13,8 +13,8 @@ export function createPlaceholderMessage(component: ComponentMapType, label = ''
   const chooseTypes: ComponentMapType[] = [
     'Select',
     'Cascader',
-    // 'Checkbox',
-    // 'CheckboxGroup',
+    'Checkbox',
+    'CheckboxGroup',
     // 'Switch',
     'TreeSelect',
   ];
