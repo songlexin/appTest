@@ -19,6 +19,13 @@
     </template>
   </Select>
 </template>
+<script lang="ts">
+  export default {
+    /* eslint-disable */
+    name: 'ApiSelect',
+    inheritAttrs: false,
+  };
+</script>
 <script lang="ts" setup>
   import { ref, watchEffect, computed, unref, watch } from 'vue';
   import { get, omit } from 'lodash-es';
@@ -32,10 +39,10 @@
 
   type OptionsItem = { label: string; value: string; disabled?: boolean };
 
-  defineOptions({
-    name: 'ApiSelect',
-    inheritAttrs: false,
-  });
+  // defineOptions({
+  //   name: 'ApiSelect',
+  //   inheritAttrs: false,
+  // });
 
   const props = defineProps({
     ...selectProps(),

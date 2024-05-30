@@ -1,5 +1,5 @@
 <template>
-  <div class="xc-content max-h-full" :style="props.styleObj" ref="dynamicTableFullRef">
+  <div class="xc-content" :style="props.styleObj" ref="dynamicTableFullRef">
     <!-- <SchemaForm
       v-if="search"
       ref="queryFormRef"
@@ -17,7 +17,7 @@
     <TableSearchForm
       v-if="search"
       ref="queryFormRef"
-      class="bg-white dark:bg-black !p-0"
+      class="bg-white dark:bg-black mb-16px !pt-24px pr-24px"
       submit-on-reset
       v-bind="getFormProps"
       :table-instance="tableAction"
@@ -29,8 +29,15 @@
       </template>
     </TableSearchForm>
     <div class="bg-white dark:bg-black dy-table">
+      <div v-show="rowSelection?.selectedRowKeys?.length" style="padding: 0 16px 8px">
+        <span style="display: inline-block; margin-right: 16px"
+          >已选{{ rowSelection?.selectedRowKeys?.length }}项</span
+        >
+        <slot name="batchAction"></slot>
+      </div>
       <ToolBar
         v-if="showToolBar"
+        v-show="!rowSelection?.selectedRowKeys?.length"
         :export-file-name="exportFileName"
         :title="headerTitle"
         :title-tooltip="titleTooltip"
@@ -59,7 +66,6 @@
           @change="handleTableChange"
           :locale="state.localeObj"
           :bordered="false"
-          :loading="props.loading"
         >
           <template v-for="(_, slotName) of $slots" #[slotName]="slotData" :key="slotName">
             <slot :name="slotName" v-bind="slotData"></slot>
@@ -76,32 +82,37 @@
     </div>
   </div>
 </template>
+<script lang="tsx">
+  export default {
+    name: 'DynamicTable',
+  };
+</script>
 
 <script lang="tsx" setup>
+  import { useSlots, provide, ref, reactive, watchEffect } from 'vue';
+  import { Table } from 'ant-design-vue';
+  import {
+    useTableMethods,
+    createTableContext,
+    useExportData2Excel,
+    useTableForm,
+    useTableState,
+    useColumns,
+    useEditable,
+  } from './hooks';
+  import { ToolBar } from './components';
+  import { dynamicTableProps, dynamicTableEmits } from './dynamic-table';
+  import type { TableActionType } from './types';
   import { SchemaForm } from '@/components/core/schema-form';
   import { TableSearchForm } from '@/components/core/table-search-form';
   import { useFullscreen } from '@vueuse/core';
-  import { Table } from 'ant-design-vue';
-  import { provide, reactive, ref, useSlots, watchEffect } from 'vue';
-  import { ToolBar } from './components';
-  import { dynamicTableEmits, dynamicTableProps } from './dynamic-table';
-  import {
-    createTableContext,
-    useColumns,
-    useEditable,
-    useExportData2Excel,
-    useTableForm,
-    useTableMethods,
-    useTableState,
-  } from './hooks';
-  import type { TableActionType } from './types';
   // @ts-ignore
   import xcTableNoData from '@/components/xc/xc-table/xc-table-noData/index.vue';
 
-  defineOptions({
-    name: 'DynamicTable',
-    inheritAttrs: false,
-  });
+  // defineOptions({
+  //   name: 'DynamicTable',
+  //   inheritAttrs: false,
+  // });
 
   const props = defineProps(dynamicTableProps);
   const emit = defineEmits(dynamicTableEmits);
@@ -199,7 +210,7 @@
     }
   }
   :deep(.ant-table-wrapper) {
-    // padding: 0 8px 0 8px;
+    padding: 0 8px 0 8px;
 
     .ant-table {
       .ant-table-title {
@@ -226,7 +237,7 @@
     flex-direction: column;
     flex: 1;
     position: relative;
-
+    padding: 0 8px;
     :deep(.ant-table-pagination.ant-pagination) {
       margin: 0;
       padding: 0px 24px;

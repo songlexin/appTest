@@ -1,22 +1,22 @@
+import type { CSSProperties, WatchOptions } from 'vue';
 import type {
-  CascaderProps,
-  CheckboxProps,
-  // RadioGroupProps,
-  // RadioProps,
-  // UploadProps,
-  DatePickerProps,
-  // SwitchProps,
-  // RateProps,
-  DividerProps,
   InputNumberProps,
   InputProps,
   // SliderProps,
   SelectProps,
+  CascaderProps,
+  // SwitchProps,
+  // RateProps,
+  DividerProps,
   TimePickerProps,
   TreeProps,
   TreeSelectProps,
+  // RadioGroupProps,
+  // RadioProps,
+  // UploadProps,
+  DatePickerProps,
+  // CheckboxProps,
 } from 'ant-design-vue';
-import type { CSSProperties, WatchOptions } from 'vue';
 import type { RenderCallbackParams } from './form';
 
 export type { ComponentMapType } from '../componentMap';
@@ -73,7 +73,6 @@ export type innerLabelComponentProps = (
   | TreeProps
   | TreeSelectProps
   | DatePickerProps
-  | CheckboxProps
 ) & {
   /** 组件异步请求数据 */
   request?: RequestConfig;

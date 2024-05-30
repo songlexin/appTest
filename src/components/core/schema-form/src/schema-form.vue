@@ -37,6 +37,11 @@
   </Form>
 </template>
 
+<script lang="ts">
+  export default {
+    name: 'SchemaForm',
+  };
+</script>
 <script lang="ts" setup>
   import { useAttrs } from 'vue';
   import { pick } from 'lodash-es';
@@ -53,9 +58,9 @@
   } from './hooks/';
   import { schemaFormProps, schemaFormEmits, aFormPropKeys } from './schema-form';
 
-  defineOptions({
-    name: 'SchemaForm',
-  });
+  // defineOptions({
+  //   name: 'SchemaForm',
+  // });
 
   const props = defineProps(schemaFormProps);
   const emit = defineEmits(schemaFormEmits);

@@ -3,25 +3,24 @@
     style="min-width: 768px"
     ref="tableSearchFormRef"
     autocomplete="off"
-    class="table-search-form !mb-12px"
+    class="table-search-form"
     v-innerLabel="formRealInfo"
     v-bind="pick(getFormProps, aFormPropKeys)"
     :model="formModel"
   >
-    <Row v-bind="getRowConfig" style="width: 100%" class="!gap-y-8px table-form-row-container">
+    <Row v-bind="getRowConfig" style="width: 100%">
       <!-- 表单项 -->
-
-      <TableSearchFormItem
-        v-for="schemaItem in formSchemasRef"
-        :key="schemaItem.field"
-        v-model:form-model="formModel"
-        :schema="schemaItem"
-        :table-instance="tableInstance"
-      >
-        <template v-for="item in Object.keys($slots)" #[item]="data" :key="item">
-          <slot :name="item" v-bind="data || {}"></slot>
-        </template>
-      </TableSearchFormItem>
+      <template v-for="schemaItem in formSchemasRef" :key="schemaItem.field">
+        <TableSearchFormItem
+          v-model:form-model="formModel"
+          :schema="schemaItem"
+          :table-instance="tableInstance"
+        >
+          <template v-for="item in Object.keys($slots)" #[item]="data" :key="item">
+            <slot :name="item" v-bind="data || {}"></slot>
+          </template>
+        </TableSearchFormItem>
+      </template>
 
       <!-- 展开、收起、查询、重置按钮 -->
       <FormAction
@@ -44,27 +43,32 @@
   >
   </a-drawer> -->
 </template>
+<script lang="ts">
+  export default {
+    name: 'TableSearchForm',
+  };
+</script>
 
 <script lang="ts" setup>
-  import { vInnerLabel } from '@/directives/innerLabel';
+  import { useAttrs } from 'vue';
+  import { pick } from 'lodash-es';
   import { Form, Row } from 'ant-design-vue';
-  import { cloneDeep, pick } from 'lodash-es';
-  import { useAttrs, watchEffect } from 'vue';
-  import FormAction from './components/form-action.vue';
+  import TableSearchFormItem from './table-search-form-item.vue';
   import {
     createFormContext,
-    useAdvanced,
+    useFormState,
     useFormEvents,
     useFormMethods,
-    useFormState,
+    useAdvanced,
     type TableSearchFormType,
   } from './hooks/';
-  import { aFormPropKeys, tableSearchFormEmits, tableSearchFormProps } from './table-search-form';
-  import TableSearchFormItem from './table-search-form-item.vue';
+  import { tableSearchFormProps, tableSearchFormEmits, aFormPropKeys } from './table-search-form';
+  import FormAction from './components/form-action.vue';
+  import { vInnerLabel } from '@/directives/innerLabel';
 
-  defineOptions({
-    name: 'TableSearchForm',
-  });
+  // defineOptions({
+  //   name: 'TableSearchForm',
+  // });
 
   const props = defineProps(tableSearchFormProps);
   const emit = defineEmits(tableSearchFormEmits);
@@ -84,11 +88,8 @@
   } = formState;
   // 表单内部方法
   const formMethods = useFormMethods({ ...formState });
-
   const { initFormValues, handleFormValues } = formMethods;
-  watchEffect(() => {
-    console.log(cloneDeep(formModel));
-  });
+
   // 初始化表单默认值
   initFormValues();
 
@@ -99,7 +100,7 @@
     drawerVisible.value = true;
   };
 
-  // 当前组件所有的状态和方法 这回会开链接
+  // 当前组件所有的状态和方法
   const instance = {
     ...formState,
     ...formEvents,
@@ -119,22 +120,4 @@
   defineExpose(instance);
 </script>
 
-<style lang="less">
-  ._inner-label-form ._form-col {
-    padding: 0 16px 0px 0 !important;
-    margin: 0 !important;
-  }
-  // .table-form-row-container{
-  //   &>div:nth-child(4){
-
-  //       padding-right: 0!important;
-  //     }
-  // }
-  .table-search-form {
-    // margin-right: -16px !important;
-  }
-  ._inner-label-form ._form-col-btn-group {
-    padding-right: 0 !important;
-    // margin-right: 16px !important;
-  }
-</style>
+<style lang="less" scoped></style>

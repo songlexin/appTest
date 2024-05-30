@@ -26,10 +26,10 @@
         </template>
         <div :style="!fullscreenModel ? dymicStyle : ''">
           <slot>
-            ① 窗口可以拖动；<br />
+            <!-- ① 窗口可以拖动；<br />
             ② 窗口可以通过八个方向改变大小；<br />
             ③ 窗口可以最小化、最大化、还原、关闭；<br />
-            ④ 限制窗口最小宽度/高度。
+            ④ 限制窗口最小宽度/高度。 -->
           </slot>
         </div>
         <template v-if="$slots.footer" #footer>
@@ -49,6 +49,7 @@
 
   import { throttle, omit } from 'lodash-es';
   import { Modal, Space } from 'ant-design-vue';
+  // import { detectZoom } from '@/utils/screen/detectZoom';
   const props = defineProps({
     ...modalProps(),
     showFullScreenIcon: {
@@ -137,6 +138,12 @@
       modalEl.style.top = `${top}px`;
     }
   };
+  // const resizeFun = () => {
+  //   const m = detectZoom();
+  //   // document.body.style.zoom = 100 / Number(m) + 0.2;
+  //   modalWrapRef.value.style['zoom'] = 1 / (100 / Number(m) + 0.2);
+  // };
+
   onMounted(async () => {
     //  防止初始化的时候就执行
 
@@ -144,6 +151,8 @@
       await nextTask();
       initDrag();
     }
+
+    // resizeFun();
   });
   onBeforeUnmount(() => {
     watcher && watcher.stop && watcher.stop();
