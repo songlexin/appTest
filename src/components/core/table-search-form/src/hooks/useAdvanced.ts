@@ -45,7 +45,7 @@ export const useAdvanced = ({ instance, emit }: UseAdvancedContext) => {
   });
 
   watch(
-    [formSchemasRef, () => unref(realWidthRef), () => formRealInfo.width],
+    [formSchemasRef, () => unref(realWidthRef)],
     () => {
       const { showAdvancedButton } = unref(getFormProps);
       if (showAdvancedButton) {
@@ -55,7 +55,7 @@ export const useAdvanced = ({ instance, emit }: UseAdvancedContext) => {
     { immediate: true },
   );
   watch(
-    () => advanceState.isAdvanced,
+    [() => advanceState.isAdvanced,() => formRealInfo.width],
     () => {
       const { showAdvancedButton } = unref(getFormProps);
       if (showAdvancedButton) {

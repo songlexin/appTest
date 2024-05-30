@@ -39,11 +39,6 @@
     </div>
   </Col>
 </template>
-<script lang="ts">
-  export default {
-    name: 'FormAction',
-  };
-</script>
 <script lang="ts" setup>
   import { computed, type PropType } from 'vue';
   import { Form, Col } from 'ant-design-vue';
@@ -55,10 +50,10 @@
 
   type ButtonOptions = Partial<ButtonProps> & { text: string };
 
-  // defineOptions({
-  //   name: 'FormAction',
-  //   inheritAttrs: false,
-  // });
+  defineOptions({
+    name: 'FormAction',
+    inheritAttrs: false,
+  });
 
   const emit = defineEmits(['toggle-advanced']);
 

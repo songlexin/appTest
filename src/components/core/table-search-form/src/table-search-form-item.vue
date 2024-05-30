@@ -9,6 +9,7 @@
       <component
         :class="getComponentClass"
         :is="getComponent"
+        :schema="schema"
         :ref="setItemRef(schema.field)"
         v-bind="getComponentProps"
         v-model:[modelValueType]="modelValue"
@@ -24,13 +25,8 @@
   </Col>
 </template>
 
-<script lang="tsx">
-  export default {
-    name: 'TableSearchFormItem',
-  };
-</script>
 <script setup lang="tsx">
-  import { computed, unref, toRefs, isVNode, onMounted, watch, nextTick } from 'vue';
+  import { computed, unref, toRefs, isVNode, onMounted, watch, nextTick, provide } from 'vue';
   import { cloneDeep, debounce, isUndefined } from 'lodash-es';
   import { Form, Col, Spin } from 'ant-design-vue';
   // import { useItemLabelWidth } from './hooks/useLabelWidth';
@@ -50,9 +46,9 @@
   import BasicHelp from '@/components/basic/basic-help/index.vue';
   import { RuleObject } from 'ant-design-vue/es/form';
 
-  // defineOptions({
-  //   name: 'TableSearchFormItem',
-  // });
+  defineOptions({
+    name: 'TableSearchFormItem',
+  });
 
   const props = defineProps(tableSearchFormItemProps);
   const emit = defineEmits(['update:formModel']);
@@ -63,6 +59,7 @@
     formContext;
 
   const { schema } = toRefs(props);
+  provide('$schema', () => props.schema);
 
   // 标签
   // const renderLabel = computed(() => {

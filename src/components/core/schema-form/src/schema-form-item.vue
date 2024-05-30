@@ -42,11 +42,6 @@
   </Col>
 </template>
 
-<script lang="tsx">
-  export default {
-    name: 'SchemaFormItem',
-  };
-</script>
 <script setup lang="tsx">
   import { computed, unref, toRefs, isVNode, onMounted, watch, nextTick } from 'vue';
   import { cloneDeep, debounce } from 'lodash-es';
@@ -63,9 +58,9 @@
   import BasicHelp from '@/components/basic/basic-help/index.vue';
   import { useI18n } from '@/hooks/useI18n';
 
-  // defineOptions({
-  //   name: 'SchemaFormItem',
-  // });
+  defineOptions({
+    name: 'SchemaFormItem',
+  });
 
   const props = defineProps(schemaFormItemProps);
   const emit = defineEmits(['update:formModel']);
@@ -240,6 +235,13 @@
         orientation: 'left',
         plain: true,
       });
+    }
+    if (schema.component === 'Select') {
+      debugger
+      componentProps = Object.assign(componentProps, {
+        placeholder:"请输入或搜索"
+      })
+
     }
     if (isVNode(getComponent.value)) {
       Object.assign(componentProps, getComponent.value.props);

@@ -1,12 +1,12 @@
-import { computed, ref, unref, watch } from 'vue';
-import { omit } from 'lodash-es';
-import { useScroll } from './useScroll';
-import type { Slots } from 'vue';
-import type { DynamicTableProps } from '../dynamic-table';
 import type { SchemaFormInstance } from '@/components/core/schema-form';
 import type { TableSearchFormInstance } from '@/components/core/table-search-form';
-import type { TableProps, Table } from 'ant-design-vue';
 import { useI18n } from '@/hooks/useI18n';
+import type { Table, TableProps } from 'ant-design-vue';
+import { omit } from 'lodash-es';
+import type { Slots } from 'vue';
+import { computed, ref, unref, watch } from 'vue';
+import type { DynamicTableProps } from '../dynamic-table';
+import { useScroll } from './useScroll';
 
 export type Pagination = TableProps['pagination'];
 export type TableState = ReturnType<typeof useTableState>;
@@ -16,7 +16,7 @@ export type UseTableStateParams = {
   slots: Slots;
 };
 
-export const useTableState = ({ props, slots }: UseTableStateParams) => {
+export const useTableState = ({ props }: UseTableStateParams) => {
   const { t } = useI18n();
   const { scroll } = useScroll({ props });
   /** 表格实例 */
@@ -64,7 +64,6 @@ export const useTableState = ({ props, slots }: UseTableStateParams) => {
 
   const getBindValues = computed(() => {
     const props = unref(getProps);
-
     let propsData: Recordable = {
       ...props,
       rowKey: props.rowKey ?? 'id',
@@ -72,9 +71,10 @@ export const useTableState = ({ props, slots }: UseTableStateParams) => {
       pagination: unref(paginationRef),
       tableLayout: props.tableLayout ?? 'fixed',
       scroll: unref(scroll),
+      size: props.size || 'small',
     };
     // if (slots.expandedRowRender) {
-    // propsData = omit(propsData, 'scroll');
+    //   propsData = omit(propsData, 'scroll');
     // }
 
     propsData = omit(propsData, ['class', 'onChange', 'columns']);

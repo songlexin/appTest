@@ -19,11 +19,6 @@
     </template>
   </Select>
 </template>
-<script lang="ts">
-  export default {
-    name: 'ApiSelect',
-  };
-</script>
 <script lang="ts" setup>
   import { PropType, ref, watchEffect, computed, unref, watch } from 'vue';
   import { get, omit } from 'lodash-es';
@@ -35,10 +30,10 @@
 
   type OptionsItem = { label: string; value: string; disabled?: boolean };
 
-  // defineOptions({
-  //   name: 'ApiSelect',
-  //   inheritAttrs: false,
-  // });
+  defineOptions({
+    name: 'ApiSelect',
+    inheritAttrs: false,
+  });
 
   const props = defineProps({
     ...selectProps(),

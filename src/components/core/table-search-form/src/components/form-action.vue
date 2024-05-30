@@ -44,38 +44,34 @@
           </span>
         </Button>
 
-        <!-- <template v-if="showDrawerButton">
-          <Button type="default" @click="toggleDrawer" class="_btn">
-            <span>高级筛选</span>
+        <template v-if="showExportButton">
+          <Button type="default" @click="exportFile" class="_btn" v-bind='getExportBtnOptions'>
+            <!-- <span>导出</span> -->
+            {{ getExportBtnOptions.text }}
           </Button>
-        </template> -->
+        </template>
       </Form.Item>
     </div>
   </Col>
 </template>
-<script lang="ts">
-  export default {
-    name: 'FormAction',
-  };
-</script>
 <script lang="ts" setup>
-  import { computed, type PropType } from 'vue';
-  import { Form, Col } from 'ant-design-vue';
-  import { useFormContext } from '../hooks/useFormContext';
   import { Button, ButtonProps } from '@/components/basic/button';
-  import type { ColEx } from '../types/component';
-  import { FormItemSchema } from '../types';
-  import { isArray } from '@/utils/is';
+import { isArray } from '@/utils/is';
+import { Col, Form } from 'ant-design-vue';
+import { computed, type PropType } from 'vue';
+import { useFormContext } from '../hooks/useFormContext';
+import { FormItemSchema } from '../types';
+import type { ColEx } from '../types/component';
   // import { selColor } from '@/utils/getColor';
 
   type ButtonOptions = Partial<ButtonProps> & { text: string };
 
-  // defineOptions({
-  //   name: 'FormAction',
-  //   inheritAttrs: false,
-  // });
+  defineOptions({
+    name: 'FormAction',
+    inheritAttrs: false,
+  });
 
-  const emit = defineEmits(['toggle-advanced', 'toggle-Drawer']);
+  const emit = defineEmits(['toggle-advanced', 'toggle-drawer','export-file']);
 
   const props = defineProps({
     showActionButtonGroup: {
@@ -102,6 +98,10 @@
       type: Object as PropType<ButtonOptions>,
       default: () => ({}),
     },
+    exportButtonOptions: {
+      type: Object as PropType<ButtonOptions>,
+      default: () => ({}),
+    },
     actionColOptions: {
       type: Object as PropType<Partial<ColEx>>,
       default: () => ({}),
@@ -113,6 +113,7 @@
     isAdvanced: Boolean,
     hideAdvanceBtn: Boolean,
     showDrawerButton: Boolean,
+    showExportButton: Boolean,
     /* 所有表单项配置 */
     schemas: {
       type: Array as PropType<Array<FormItemSchema>>,
@@ -121,7 +122,7 @@
   });
 
   const formContext = useFormContext();
-  const { resetFields, submit } = formContext;
+  const { resetFields, submit} = formContext;
 
   // 计算action区域宽度
   const showDrawerBtn = computed(() => {
@@ -173,10 +174,20 @@
       props.submitButtonOptions,
     );
   });
-
+  const getExportBtnOptions = computed(() => {
+    return Object.assign(
+      {
+        text: '导出',
+      },
+      props.exportButtonOptions,
+    );
+  });
   // 点击【展开/收起】按钮触发
   function toggleAdvanced() {
     emit('toggle-advanced', props.isAdvanced);
+  }
+  function exportFile() {
+    emit('export-file');
   }
 
   // function toggleDrawer() {
