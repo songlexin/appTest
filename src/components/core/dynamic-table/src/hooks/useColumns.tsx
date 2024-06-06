@@ -24,9 +24,11 @@ export type UseTableColumnsContext = {
 
 export const useColumns = ({ state, methods, props, tableAction }: UseTableColumnsContext) => {
   const slots = useSlots();
+
   const innerColumns = ref(props.columns);
   const { getColumnKey } = methods;
   const { getProps } = state;
+
   const { isEditable } = tableAction;
 
   watchEffect(() => {

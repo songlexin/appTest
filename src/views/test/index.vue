@@ -75,7 +75,7 @@
     sumReturnAmt3: '',
     doExportLoaing: false,
     getValue: '',
-    showFlag: false,
+    showFlag: true,
   });
 
   // 拖拉表格列
@@ -227,7 +227,7 @@
   watchEffect(() => {
     state.getValue = refs.mainSearch?.formModel?.mgrCorpId;
     state.showFlag = refs.mainSearch?.formModel?.groupByCust;
-    console.log('col---', columns);
+    console.log('cstate.showFlag', state.showFlag);
   });
   onMounted(() => {});
 </script>
